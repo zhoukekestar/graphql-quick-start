@@ -22,6 +22,7 @@
 ```
 
 ## blog
+* This demo is based on [kadirahq/graphql-blog-schema](https://github.com/kadirahq/graphql-blog-schema).
 * `cd src/blog`
 * `babel-node index.js`
 * query
@@ -47,3 +48,9 @@
   }
 }
 ```
+
+## koa-graphql
+* `cd src/koa-graphql`
+* `babel-node hello-world.js` OR `babel-node blog.js`
+* Open Chrome & visit `http://localhost:4000/graphql?query={hello}`
+* If you disable `graphiql`, you can get data directly through the URL

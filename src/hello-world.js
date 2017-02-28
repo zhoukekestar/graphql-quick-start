@@ -1,14 +1,8 @@
 import {
-	graphql,
-  GraphQLList,
+  graphql,
   GraphQLObjectType,
   GraphQLSchema,
   GraphQLString,
-  GraphQLInt,
-  GraphQLFloat,
-  GraphQLEnumType,
-  GraphQLNonNull,
-  GraphQLInterfaceType
 } from 'graphql';
 
 const schema = new GraphQLSchema({
@@ -27,12 +21,6 @@ const schema = new GraphQLSchema({
 
 const query = '{ hello }';
 
-graphql(schema, query).then(result => {
-
-  // Prints
-  // {
-  //   data: { hello: "world" }
-  // }
-  console.log(result);
-
+graphql(schema, query).then((result) => {
+  console.log(JSON.stringify(result, null, 2));
 });

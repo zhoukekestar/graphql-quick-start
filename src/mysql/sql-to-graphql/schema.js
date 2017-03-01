@@ -1,50 +1,50 @@
-'use strict';
-var getEntityResolver = require('./util/entity-resolver');
-var GraphQL = require('graphql');
-var StoryType = require('./types/StoryType');
-var UserType = require('./types/UserType');
-var resolveMap = require('./resolve-map');
-var types = require('./types');
-var GraphQLObjectType = GraphQL.GraphQLObjectType;
-var GraphQLSchema = GraphQL.GraphQLSchema;
-var GraphQLNonNull = GraphQL.GraphQLNonNull;
-var GraphQLInt = GraphQL.GraphQLInt;
-var registerType = resolveMap.registerType;
 
-var schema = new GraphQLSchema({
-    query: new GraphQLObjectType({
-        name: 'RootQueryType',
+const getEntityResolver = require('./util/entity-resolver');
+const GraphQL = require('graphql');
+const StoryType = require('./types/StoryType');
+const UserType = require('./types/UserType');
+const resolveMap = require('./resolve-map');
+const types = require('./types');
+const GraphQLObjectType = GraphQL.GraphQLObjectType;
+const GraphQLSchema = GraphQL.GraphQLSchema;
+const GraphQLNonNull = GraphQL.GraphQLNonNull;
+const GraphQLInt = GraphQL.GraphQLInt;
+const registerType = resolveMap.registerType;
 
-        fields: function getRootQueryFields() {
-            return {
-                story: {
-                    type: StoryType,
+const schema = new GraphQLSchema({
+  query: new GraphQLObjectType({
+    name: 'RootQueryType',
 
-                    args: {
-                        id: {
-                            name: 'id',
-                            type: new GraphQLNonNull(GraphQLInt)
-                        }
-                    },
+    fields: function getRootQueryFields() {
+      return {
+        story: {
+          type: StoryType,
 
-                    resolve: getEntityResolver('Story')
-                },
+          args: {
+            id: {
+              name: 'id',
+              type: new GraphQLNonNull(GraphQLInt),
+            },
+          },
 
-                user: {
-                    type: UserType,
+          resolve: getEntityResolver('Story'),
+        },
 
-                    args: {
-                        id: {
-                            name: 'id',
-                            type: new GraphQLNonNull(GraphQLInt)
-                        }
-                    },
+        user: {
+          type: UserType,
 
-                    resolve: getEntityResolver('User')
-                }
-            };
-        }
-    })
+          args: {
+            id: {
+              name: 'id',
+              type: new GraphQLNonNull(GraphQLInt),
+            },
+          },
+
+          resolve: getEntityResolver('User'),
+        },
+      };
+    },
+  }),
 });
 
 module.exports = schema;

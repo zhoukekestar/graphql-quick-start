@@ -1,16 +1,16 @@
-'use strict';
 
-var knex = require('knex');
-var config = require('./config/config');
-var db;
+
+const knex = require('knex');
+const config = require('./config/config');
+let db;
 
 function getDb() {
-    return db || getDb.reconnect();
+  return db || getDb.reconnect();
 }
 
-getDb.reconnect = function() {
-    db = knex(config);
-    return db;
+getDb.reconnect = function () {
+  db = knex(config);
+  return db;
 };
 
 module.exports = getDb;

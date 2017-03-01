@@ -1,38 +1,38 @@
-'use strict';
 
-var Boom = require('boom');
-var graphql = require('graphql').graphql;
-var schema = require('../schema');
+
+const Boom = require('boom');
+const graphql = require('graphql').graphql;
+const schema = require('../schema');
 
 module.exports = function graphqlHandler(request, reply) {
-    var payload = (request.payload || '').toString();
-    graphql(schema, payload).then(function(result) {
-        if (result.errors) {
-            logErrors(result.errors);
+  const payload = (request.payload || '').toString();
+  graphql(schema, payload).then((result) => {
+    if (result.errors) {
+      logErrors(result.errors);
 
-            return reply(Boom.badRequest(
-                result.errors.reduce(reduceErrors, [])
+      return reply(Boom.badRequest(
+                result.errors.reduce(reduceErrors, []),
             ));
-        }
+    }
 
-        return reply(result);
-    });
+    return reply(result);
+  });
 };
 
 function reduceErrors(errs, err) {
     // Hacky, but knex sucks at errors and graphql swallows errors.
-    var isDbErr = err.message.indexOf('Pool') === 0;
+  const isDbErr = err.message.indexOf('Pool') === 0;
 
-    errs.push((isDbErr ? '[Database] ' : '') + err.message);
-    return errs;
+  errs.push((isDbErr ? '[Database] ' : '') + err.message);
+  return errs;
 }
 
 function logErrors(errs) {
-    errs.forEach(function(err) {
-        console.log(err.message);
+  errs.forEach((err) => {
+    console.log(err.message);
 
-        if (err.stack) {
-            console.log(err.stack);
-        }
-    });
+    if (err.stack) {
+      console.log(err.stack);
+    }
+  });
 }

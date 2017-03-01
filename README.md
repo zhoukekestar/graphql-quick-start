@@ -7,7 +7,7 @@
 
 ## hello world
 * `cd src`
-* `babel-node hello-world.js`
+* `babel-node hello-world.es6` OR `node hello-world.js`
 * query:
 ```
 { hello }

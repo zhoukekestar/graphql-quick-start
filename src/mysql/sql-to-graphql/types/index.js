@@ -1,7 +1,7 @@
-var StoryType = require('./StoryType');
-var UserType = require('./UserType');
+const StoryType = require('./StoryType');
+const UserType = require('./UserType');
 
 module.exports = {
-  'StoryType': StoryType,
-  'UserType': UserType,
+  StoryType,
+  UserType,
 };
